@@ -1,7 +1,7 @@
 {
-  "name": "nethunt-nodejs",
-  "version": "1.0.0",
-  "description": "Nethunt node.js REST api",
+  "name": "nethunt-js",
+  "version": "0.6.2",
+  "description": "nethunt-js is a client for https://nethunt.com/integration-api",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests -t 10000 || true",
