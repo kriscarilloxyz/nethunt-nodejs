@@ -1,4 +1,5 @@
 const requestPromise = require('minimal-request-promise')
+const querystring = require('querystring')
 
 /**
 *  Nethunt client
