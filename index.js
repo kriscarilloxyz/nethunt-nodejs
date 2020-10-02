@@ -81,13 +81,25 @@ class Nethunt {
     })
       .then(res => JSON.parse(res.body))
   }
-  async findRecord () { }
-  async newRecord () { }
-  async newComment () { }
-  async updatedRecord () { }
-  async recordChange () { }
-  async createRecord () { }
-  async createComment () { }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  async findRecord (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/searches/find-record/${folderId}?${querystring.stringify(params)}`, {
+      headers: {
+        Authorization: `Basic ${this.base64}`
+      }
+    })
+      .then(res => JSON.parse(res.body))
+  }
+
   async createCallLog () { }
   async updateRecord () { }
   async linkGmailThread () { }
