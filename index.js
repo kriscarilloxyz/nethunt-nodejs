@@ -163,6 +163,25 @@ class Nethunt {
       .then(res => JSON.parse(res.body))
   }
 
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  async createRecord (folderId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/create-record/${folderId}`, {
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Basic ${this.base64}`
+      }
+    })
+      .then(res => JSON.parse(res.body))
+  }
+
   async createCallLog () { }
   async updateRecord () { }
   async linkGmailThread () { }
