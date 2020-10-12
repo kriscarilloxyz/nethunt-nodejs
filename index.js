@@ -216,7 +216,8 @@ class Nethunt {
       `https://nethunt.com/api/v1/zapier/actions/update-record/${recordId}`, {
       body: JSON.stringify(body),
       headers: {
-        Authorization: `Basic ${this.base64}`
+        Authorization: `Basic ${this.base64}`,
+        "Content-Type": "application/json"
       }
     })
       .then(res => JSON.parse(res.body))

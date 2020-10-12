@@ -49,4 +49,17 @@ describe('nethunt', () => {
     expect(res).to.be.an('array')
   })
 
+  it('updateRecord', async () => {
+    const res = await nethunt.updateRecord(
+      process.env.NETHUNT_RECORDID, {
+      fieldActions: {
+        'Téléphone': {
+          add: ['0682666699'],
+          overwrite: true
+        },
+      }
+    }
+    )
+  })
+
 })
