@@ -36,13 +36,17 @@ describe('nethunt', () => {
 
   it('folderField', async () => {
     const res = await nethunt.folderField(
-      process.env.NETHUNT_TEST_FOLDERID
+      process.env.NETHUNT_FOLDERID
     )
     expect(res).to.be.an('array')
   })
 
   it('findRecord', async () => {
-    const res = await nethunt.findRecord()
+    const res = await nethunt.findRecord(
+      process.env.NETHUNT_FOLDERID,
+      { created: "today" }
+    )
+    expect(res).to.be.an('array')
   })
 
 })

@@ -94,7 +94,7 @@ class Nethunt {
    */
   async findRecord (folderId, params) {
     return requestPromise.get(
-      `https://nethunt.com/api/v1/zapier/searches/find-record/${folderId}?${querystring.stringify(params)}`, {
+      `https://nethunt.com/api/v1/zapier/searches/find-record/${folderId}?query=${querystring.stringify(params)}`, {
       headers: {
         Authorization: `Basic ${this.base64}`
       }
