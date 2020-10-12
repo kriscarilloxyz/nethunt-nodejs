@@ -1,6 +1,6 @@
 {
   "name": "@kriscarilloxyz/nethunt-js",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "nethunt-js is a client for https://nethunt.com/integration-api",
   "main": "index.js",
   "scripts": {
