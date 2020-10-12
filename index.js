@@ -178,6 +178,7 @@ class Nethunt {
       `https://nethunt.com/api/v1/zapier/actions/create-record/${folderId}`, {
       body: JSON.stringify(body),
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Basic ${this.base64}`
       }
     })
@@ -197,12 +198,32 @@ class Nethunt {
       `https://nethunt.com/api/v1/zapier/actions/create-comment/${folderId}`, {
       body: JSON.stringify(body),
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Basic ${this.base64}`
       }
     })
       .then(res => JSON.parse(res.body))
   }
-  async createCallLog () { }
+
+  /**
+   *
+   *
+   * @param {*} recordId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  async createCallLog (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/create-call-log/${recordId}`, {
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${this.base64}`
+      }
+    })
+      .then(res => JSON.parse(res.body))
+  }
 
   /**
    *
