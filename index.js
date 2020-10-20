@@ -2,6 +2,25 @@ const requestPromise = require('minimal-request-promise')
 const querystring = require('querystring')
 
 /**
+ * Converts username and password
+ * to base64 string for headers
+ *
+ * @param {*} username
+ * @param {*} paswword
+ * @returns {base64} string from username and passwords 
+ */
+function toBase64 (username, password) {
+  if (!username) { throw Error('Username cannot be blank') }
+  if (!password) { throw Error('Password cannot be blank') }
+
+  return Buffer.from(`${username}:${password}`).toString('base64')
+}
+
+function generateHeaders () {
+
+}
+
+/**
 *  Nethunt client
 *  @param {string} username - Nethunt username
 *  @param {string} password - Nethunt password 
@@ -247,4 +266,7 @@ class Nethunt {
   async authTest () { }
 }
 
-module.exports = Nethunt
+module.exports = {
+  Nethunt,
+  toBase64
+}

@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const Nethunt = require('../index')
+const { Nethunt } = require('../index')
 
 describe('wrapper', () => {
   context('no username given', () => {

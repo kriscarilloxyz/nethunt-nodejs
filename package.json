@@ -4,9 +4,11 @@
   "description": "nethunt-js is a client for https://nethunt.com/integration-api",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests -t 10000 || true",
-    "jsdoc": "jsdoc index.js",
-    "release:patch": "npm version patch && git push && npm publish",
+    "test": "mocha tests -t 10000",
+    "test:wrapper": "mocha tests/nethunt.wrapper.test",
+    "test:toBase64": "mocha tests/nethunt.toBase64.test",
+    "coverage": "nyc npm run test",
+    "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
     "release:major": "npm version major && git push && npm publish"
   },
@@ -33,6 +35,7 @@
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "jsdoc": "^3.6.6",
-    "mocha": "^8.1.3"
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0"
   }
 }
