@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests -t 10000",
-    "test:wrapper": "mocha tests/nethunt.wrapper.test",
     "test:toBase64": "mocha tests/nethunt.toBase64.test",
     "test:generateHeaders": "mocha tests/nethunt.generateHeaders.test",
+    "test:wrapper": "mocha tests/nethunt.wrapper.test",
+    "test:readableFolder": "mocha tests/nethunt.readableFolder.test",
+    "test:writableFolder": "mocha tests/nethunt.writableFolder.test",
+    "test:folderField": "mocha tests/nethunt.folderField.test",
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
