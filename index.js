@@ -37,7 +37,7 @@ class Nethunt {
   *  ]
   * @returns {Array} List of readable folders
   */
-  async readableFolder () {
+  readableFolder () {
     return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/readable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
@@ -56,7 +56,7 @@ class Nethunt {
   *    }
   *  ]
   */
-  async writableFolder () {
+  writableFolder () {
     return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/writable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
@@ -66,7 +66,7 @@ class Nethunt {
    * @param  {string} folderId - Folder ID to list fields 
    * @return {Array} 
    */
-  async folderField (folderId) {
+  folderField (folderId) {
     return requestPromise.get(`https://nethunt.com/api/v1/zapier/triggers/folder-field/${folderId}`, this.options)
       .then(res => JSON.parse(res.body))
   }
@@ -79,7 +79,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async findRecord (folderId, params) {
+  findRecord (folderId, params) {
     return requestPromise.get(
       `https://nethunt.com/api/v1/zapier/searches/find-record/${folderId}?query=${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
@@ -93,7 +93,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async newRecord (folderId, params) {
+  newRecord (folderId, params) {
     return requestPromise.get(
       `https://nethunt.com/api/v1/zapier/triggers/new-record/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
@@ -107,7 +107,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async newComment (folderId, params) {
+  newComment (folderId, params) {
     return requestPromise.get(
       `https://nethunt.com/api/v1/zapier/triggers/new-comment/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
@@ -121,7 +121,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async updatedRecord (folderId, params) {
+  updatedRecord (folderId, params) {
     return requestPromise.get(
       `https://nethunt.com/api/v1/zapier/triggers/updated-record/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
@@ -135,13 +135,9 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async recordChange (folderId, params) {
+  recordChange (folderId, params) {
     return requestPromise.get(
-      `https://nethunt.com/api/v1/zapier/triggers/record-change/${folderId}?${querystring.stringify(params)}`, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+      `https://nethunt.com/api/v1/zapier/triggers/record-change/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -153,7 +149,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async createRecord (folderId, body) {
+  createRecord (folderId, body) {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/create-record/${folderId}`, {
       body: JSON.stringify(body),
@@ -173,7 +169,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async createComment (folderId, body) {
+  createComment (folderId, body) {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/create-comment/${folderId}`, {
       body: JSON.stringify(body),
@@ -193,7 +189,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async createCallLog (recordId, body) {
+  createCallLog (recordId, body) {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/create-call-log/${recordId}`, {
       body: JSON.stringify(body),
@@ -212,7 +208,7 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  async updateRecord (recordId, body) {
+  updateRecord (recordId, body) {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/update-record/${recordId}`, {
       body: JSON.stringify(body),
@@ -223,8 +219,18 @@ class Nethunt {
     })
       .then(res => JSON.parse(res.body))
   }
-  async linkGmailThread () { }
-  async authTest () { }
+  linkGmailThread () { }
+
+  /**
+   *
+   *
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  authTest () {
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/auth-test', this.options)
+      .then(res => JSON.parse(res.body))
+  }
 }
 
 module.exports = Nethunt
