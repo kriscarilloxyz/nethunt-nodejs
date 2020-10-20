@@ -50,9 +50,9 @@ class Nethunt {
   constructor(username, password) {
     if (!username) { throw Error('Username cannot be blank') }
     if (!password) { throw Error('Password cannot be blank') }
-    this.username = username
-    this.password = password
-    this.base64 = Buffer.from(username + ':' + password).toString('base64')
+    this.options = generateHeaders(toBase64(
+      username, password
+    ))
   }
 
   /** 
