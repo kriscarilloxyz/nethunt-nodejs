@@ -19,11 +19,6 @@ const client = new Nethunt(username, password)
 const readableFolders = await client.readableFolders()
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
 ## Requirements
 
 Nethunt JS will be a wrapper for nethunt api integration. The goal is to make nethunt API easily accessible in node.js
@@ -78,11 +73,11 @@ Nethunt JS will be a wrapper for nethunt api integration. The goal is to make ne
   7.  **Verify request credentials**  
       1.  GET `/triggers/auth-test`
 
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-
-
-
-
+Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
