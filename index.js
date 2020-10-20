@@ -16,8 +16,20 @@ function toBase64 (username, password) {
   return Buffer.from(`${username}:${password}`).toString('base64')
 }
 
-function generateHeaders () {
-
+/**
+ *
+ *
+ * @param {*} base64
+ * @return {headers} object containg headers to be used in nethunt calls 
+ */
+function generateHeaders (base64) {
+  if (!base64) { throw Error('Base64 cannot be blank') }
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${base64}`
+    }
+  }
 }
 
 /**
@@ -268,5 +280,6 @@ class Nethunt {
 
 module.exports = {
   Nethunt,
-  toBase64
+  toBase64,
+  generateHeaders
 }
