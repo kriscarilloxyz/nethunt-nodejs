@@ -1,36 +1,6 @@
-const requestPromise = require('minimal-request-promise')
 const querystring = require('querystring')
-
-/**
- * Converts username and password
- * to base64 string for headers
- *
- * @param {*} username
- * @param {*} paswword
- * @returns {base64} string from username and passwords 
- */
-function toBase64 (username, password) {
-  if (!username) { throw Error('Username cannot be blank') }
-  if (!password) { throw Error('Password cannot be blank') }
-
-  return Buffer.from(`${username}:${password}`).toString('base64')
-}
-
-/**
- *
- *
- * @param {*} base64
- * @return {headers} object containg headers to be used in nethunt calls 
- */
-function generateHeaders (base64) {
-  if (!base64) { throw Error('Base64 cannot be blank') }
-  return {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Basic ${base64}`
-    }
-  }
-}
+const requestPromise = require('minimal-request-promise')
+const { toBase64, generateHeaders } = require('./utils')
 
 /**
 *  Nethunt client
@@ -43,16 +13,14 @@ class Nethunt {
   *   to base64 for basic auth Authorization header
   *   @param {string} username - Nethunt username
   *   @param {string} password - Nethunt password 
-  *   @returns {string} this.username - Nethunt username
-  *   @returns {string} this.password - Nethunt password
-  *   @returns {Buffer} this.base64 - Base64 encoded username and password
   */
   constructor(username, password) {
     if (!username) { throw Error('Username cannot be blank') }
     if (!password) { throw Error('Password cannot be blank') }
-    this.options = generateHeaders(toBase64(
-      username, password
-    ))
+
+    this.options = generateHeaders(
+      toBase64(username, password)
+    )
   }
 
   /** 
@@ -70,11 +38,7 @@ class Nethunt {
   * @returns {Array} List of readable folders
   */
   async readableFolder () {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/readable-folder', {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/readable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -93,11 +57,7 @@ class Nethunt {
   *  ]
   */
   async writableFolder () {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/writable-folder', {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/writable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -107,11 +67,7 @@ class Nethunt {
    * @return {Array} 
    */
   async folderField (folderId) {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/folder-field/' + folderId, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+    return requestPromise.get(`https://nethunt.com/api/v1/zapier/triggers/folder-field/${folderId}`, this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -278,8 +234,4 @@ class Nethunt {
   async authTest () { }
 }
 
-module.exports = {
-  Nethunt,
-  toBase64,
-  generateHeaders
-}
+module.exports = Nethunt
