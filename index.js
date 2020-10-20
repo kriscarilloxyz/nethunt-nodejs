@@ -123,11 +123,7 @@ class Nethunt {
    */
   async updatedRecord (folderId, params) {
     return requestPromise.get(
-      `https://nethunt.com/api/v1/zapier/triggers/updated-record/${folderId}?${querystring.stringify(params)}`, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+      `https://nethunt.com/api/v1/zapier/triggers/updated-record/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
   }
 
