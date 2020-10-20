@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { toBase64 } = require('../index')
+const { toBase64 } = require('../utils')
 
 describe('toBase64', () => {
   context('no username given', () => {
