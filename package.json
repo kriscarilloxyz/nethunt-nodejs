@@ -11,6 +11,7 @@
     "test:readableFolder": "mocha tests/nethunt.readableFolder.test",
     "test:writableFolder": "mocha tests/nethunt.writableFolder.test",
     "test:folderField": "mocha tests/nethunt.folderField.test",
+    "test:findRecord": "mocha tests/nethunt.findRecord.test",
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
