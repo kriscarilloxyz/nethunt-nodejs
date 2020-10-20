@@ -98,6 +98,15 @@ class Nethunt {
       `https://nethunt.com/api/v1/zapier/triggers/new-record/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
   }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
   async newComment (folderId, params) {
     return requestPromise.get(
       `https://nethunt.com/api/v1/zapier/triggers/new-comment/${folderId}?${querystring.stringify(params)}`, this.options)
