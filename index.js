@@ -95,20 +95,12 @@ class Nethunt {
    */
   async newRecord (folderId, params) {
     return requestPromise.get(
-      `https://nethunt.com/api/v1/zapier/triggers/new-record/${folderId}?${querystring.stringify(params)}`, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+      `https://nethunt.com/api/v1/zapier/triggers/new-record/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
   }
   async newComment (folderId, params) {
     return requestPromise.get(
-      `https://nethunt.com/api/v1/zapier/triggers/new-comment/${folderId}?${querystring.stringify(params)}`, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+      `https://nethunt.com/api/v1/zapier/triggers/new-comment/${folderId}?${querystring.stringify(params)}`, this.options)
       .then(res => JSON.parse(res.body))
   }
 
