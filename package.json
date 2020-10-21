@@ -1,7 +1,7 @@
 {
   "name": "@kriscarilloxyz/nethunt-js",
   "version": "0.8.0",
-  "description": "nethunt-js is a client for https://nethunt.com/integration-api",
+  "description": "nethunt-js is a wrapper for Nethunt API written in node-js.",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests -t 5000",
@@ -24,11 +24,12 @@
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
     "release:major": "npm version major && git push && npm publish",
-    "jsdoc": "rm -rf ./docs && jsdoc index.js utils.js --destination ./docs"
+    "jsdoc": "rm -rf ./docs && jsdoc index.js utils.js --destination ./docs",
+    "mocha:makefile": "mocha -u tdd -—reporter spec"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kriscarilloxyz/nethunt-nodejs.git"
+    "url": "git+https://github.com/kriscarilloxyz/nethunt-js.git"
   },
   "keywords": [
     "nethunt",
@@ -39,9 +40,9 @@
   "author": "kriscarilloxyz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kriscarilloxyz/nethunt-nodejs/issues"
+    "url": "https://github.com/montpcdev/nethunt-js/issues"
   },
-  "homepage": "https://github.com/kriscarilloxyz/nethunt-nodejs#readme",
+  "homepage": "https://github.com/montpcdev/nethunt-js#readme",
   "dependencies": {
     "minimal-request-promise": "^1.5.0"
   },

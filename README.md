@@ -2,16 +2,16 @@
 
 nethunt-js is a wrapper for https://nethunt.com/integration-api
 
-## Badges
+<!-- badges: start -->
 
-- Documentation
-- Security
-- CI (Travis)
-- Coverage
-- Dependencies
-- devDependencies
-- NPM package
-- NPM Module Download Stats
+[![Inline docs](http://inch-ci.org/github/montpcdev/nethunt-js.svg?branch=master)](http://inch-ci.org/github/montpcdev/nethunt-js)
+[![Known Vulnerabilities](https://snyk.io/test/github/montpcdev/nethunt-js/badge.svg?targetFile=package.json)](https://snyk.io/test/github/montpcdev/nethunt-js?targetFile=package.json)
+[![Codecov test coverage](https://codecov.io/github/montpcdev/nethunt-js/coverage.svg?branch=master)](https://codecov.io/github/Rdatatable/data.table?branch=master)
+[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/montpcdev/nethunt-js "JavaScript The Good Parts")
+[![HitCount](http://hits.dwyl.com/montpcdev/netunt-js.svg)](http://hits.dwyl.com/montpcdev/netunt-js)
+[![https://nodei.co/npm/@kriscarilloxyz/nethunt-js.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/@kriscarilloxyz/nethunt-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@kriscarilloxyz/nethunt-js)
+
+<!-- badges: end -->
 
 ## Installation
 
