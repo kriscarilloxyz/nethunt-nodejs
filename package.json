@@ -4,7 +4,7 @@
   "description": "nethunt-js is a client for https://nethunt.com/integration-api",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests -t 10000",
+    "test": "mocha tests -t 5000",
     "test:toBase64": "mocha tests/nethunt.toBase64.test",
     "test:generateHeaders": "mocha tests/nethunt.generateHeaders.test",
     "test:wrapper": "mocha tests/nethunt.wrapper.test",
@@ -12,6 +12,9 @@
     "test:writableFolder": "mocha tests/nethunt.writableFolder.test",
     "test:folderField": "mocha tests/nethunt.folderField.test",
     "test:findRecord": "mocha tests/nethunt.findRecord.test",
+    "test:newRecord": "mocha tests/nethunt.newRecord.test",
+    "test:recordChange": "mocha tests/nethunt.recordChange.test",
+    "test:updatedRecord": "mocha tests/nethunt.updatedRecord.test",
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",

@@ -8,9 +8,12 @@ describe('folderField', () => {
   const client = new Nethunt(TEST_USERNAME, TEST_PASSWORD)
 
   context('invalid credentials', () => {
-    it('throws error', () => {
+    it('throws error', (done) => {
       clientInvalid.folderField()
-        .catch(err => expect(err.body).to.equal('Your email address or API key does not appear to be valid'))
+        .catch(err => {
+          expect(err.body).to.equal('Your email address or API key does not appear to be valid')
+          done()
+        })
     })
   })
 
@@ -21,10 +24,12 @@ describe('folderField', () => {
   })
 
   context('valid credentials', () => {
-    it('returns list of folder fields', () => {
+    it('returns list of folder fields', (done) => {
       client.folderField(TEST_FOLDERID)
-        .then(response => expect(response).to.be.an('array'))
-        .catch(err => expect(err.body).to.be.null)
+        .then(response => {
+          expect(response).to.be.an('array')
+          done()
+        })
     })
   })
 })
