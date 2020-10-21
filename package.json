@@ -1,6 +1,6 @@
 {
   "name": "@kriscarilloxyz/nethunt-js",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "nethunt-js is a wrapper for Nethunt API written in node-js.",
   "main": "index.js",
   "scripts": {
