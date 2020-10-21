@@ -26,7 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const requestPromise = require('minimal-request-promise')
+            <pre class="prettyprint source linenums"><code>const querystring = require('querystring')
+const requestPromise = require('minimal-request-promise')
+const { toBase64, generateHeaders } = require('./utils')
 
 /**
 *  Nethunt client
@@ -39,14 +41,14 @@ class Nethunt {
   *   to base64 for basic auth Authorization header
   *   @param {string} username - Nethunt username
   *   @param {string} password - Nethunt password 
-  *   @returns {string} this.username - Nethunt username
-  *   @returns {string} this.password - Nethunt password
-  *   @returns {Buffer} this.base64 - Base64 encoded username and password
   */
   constructor(username, password) {
-    this.username = username
-    this.password = password
-    this.base64 = Buffer.from(username + ':' + password).toString('base64')
+    if (!username) { throw Error('Username cannot be blank') }
+    if (!password) { throw Error('Password cannot be blank') }
+
+    this.options = generateHeaders(
+      toBase64(username, password)
+    )
   }
 
   /** 
@@ -63,12 +65,8 @@ class Nethunt {
   *  ]
   * @returns {Array} List of readable folders
   */
-  async readableFolder () {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/readable-folder', {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+  readableFolder () {
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/readable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -86,12 +84,8 @@ class Nethunt {
   *    }
   *  ]
   */
-  async writableFolder () {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/writable-folder', {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
-    })
+  writableFolder () {
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/writable-folder', this.options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -100,25 +94,175 @@ class Nethunt {
    * @param  {string} folderId - Folder ID to list fields 
    * @return {Array} 
    */
-  async folderField (folderId) {
-    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/folder-field/' + folderId, {
-      headers: {
-        Authorization: `Basic ${this.base64}`
-      }
+  folderField (folderId) {
+    return requestPromise.get(`https://nethunt.com/api/v1/zapier/triggers/folder-field/${folderId}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  findRecord (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/searches/find-record/${folderId}?query=${querystring.stringify(params)}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  newRecord (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/triggers/new-record/${folderId}?${querystring.stringify(params)}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  newComment (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/triggers/new-comment/${folderId}?${querystring.stringify(params)}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  updatedRecord (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/triggers/updated-record/${folderId}?${querystring.stringify(params)}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} params
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  recordChange (folderId, params) {
+    return requestPromise.get(
+      `https://nethunt.com/api/v1/zapier/triggers/record-change/${folderId}?${querystring.stringify(params)}`, this.options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  createRecord (folderId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/create-record/${folderId}`, {
+      body: JSON.stringify(body),
+      ...this.options
     })
       .then(res => JSON.parse(res.body))
   }
-  async findRecord () { }
-  async newRecord () { }
-  async newComment () { }
-  async updatedRecord () { }
-  async recordChange () { }
-  async createRecord () { }
-  async createComment () { }
-  async createCallLog () { }
-  async updateRecord () { }
-  async linkGmailThread () { }
-  async authTest () { }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  createComment (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/create-comment/${recordId}`, {
+      body: JSON.stringify(body),
+      ...this.options
+    })
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} recordId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  createCallLog (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/create-call-log/${recordId}`, {
+      body: JSON.stringify(body),
+      ...this.options
+    })
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} folderId
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  updateRecord (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/update-record/${recordId}`, {
+      body: JSON.stringify(body),
+      ...this.options
+    })
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+   *
+   *
+   * @param {*} recordId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  linkGmailThread (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/link-gmail-thread/${recordId}`, {
+      body: JSON.stringify(body),
+      ...this.options
+    }
+    )
+  }
+
+  /**
+   *
+   *
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  authTest () {
+    return requestPromise.get('https://nethunt.com/api/v1/zapier/triggers/auth-test', this.options)
+      .then(res => JSON.parse(res.body))
+  }
 }
 
 module.exports = Nethunt</code></pre>
@@ -131,13 +275,13 @@ module.exports = Nethunt</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Nethunt.html">Nethunt</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Nethunt.html">Nethunt</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generateHeaders">generateHeaders</a></li><li><a href="global.html#toBase64">toBase64</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Sep 27 2020 23:34:38 GMT+0800 (Philippine Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Oct 21 2020 13:57:04 GMT+0800 (Singapore Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

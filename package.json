@@ -23,7 +23,8 @@
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
-    "release:major": "npm version major && git push && npm publish"
+    "release:major": "npm version major && git push && npm publish",
+    "jsdoc": "rm -rf ./docs && jsdoc index.js utils.js --destination ./docs"
   },
   "repository": {
     "type": "git",

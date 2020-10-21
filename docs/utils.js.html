@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utils.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utils.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Converts username and password
+ * to base64 string for headers
+ *
+ * @param {*} username
+ * @param {*} paswword
+ * @returns {base64} string from username and passwords 
+ */
+function toBase64 (username, password) {
+  if (!username) { throw Error('Username cannot be blank') }
+  if (!password) { throw Error('Password cannot be blank') }
 
+  return Buffer.from(username + ':' + password).toString('base64')
+}
 
-    <h3> </h3>
+/**
+ *
+ *
+ * @param {*} base64
+ * @return {headers} object containg headers to be used in nethunt calls 
+ */
+function generateHeaders (base64) {
+  if (!base64) { throw Error('Base64 cannot be blank') }
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${base64}`
+    }
+  }
+}
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = {
+  toBase64,
+  generateHeaders
+}</code></pre>
+        </article>
+    </section>
 
 
 
