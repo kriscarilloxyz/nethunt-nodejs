@@ -166,14 +166,11 @@ class Nethunt {
    * @return {*} 
    * @memberof Nethunt
    */
-  createComment (folderId, body) {
+  createComment (recordId, body) {
     return requestPromise.post(
-      `https://nethunt.com/api/v1/zapier/actions/create-comment/${folderId}`, {
+      `https://nethunt.com/api/v1/zapier/actions/create-comment/${recordId}`, {
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${this.base64}`
-      }
+      ...this.options
     })
       .then(res => JSON.parse(res.body))
   }
@@ -190,10 +187,7 @@ class Nethunt {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/create-call-log/${recordId}`, {
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${this.base64}`
-      }
+      ...this.options
     })
       .then(res => JSON.parse(res.body))
   }

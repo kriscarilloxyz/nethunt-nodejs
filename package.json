@@ -16,6 +16,7 @@
     "test:recordChange": "mocha tests/nethunt.recordChange.test",
     "test:updatedRecord": "mocha tests/nethunt.updatedRecord.test",
     "test:createRecord": "mocha tests/nethunt.createRecord.test",
+    "test:createComment": "mocha tests/nethunt.createComment.test",
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",
