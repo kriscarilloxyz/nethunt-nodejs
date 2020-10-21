@@ -153,10 +153,7 @@ class Nethunt {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/create-record/${folderId}`, {
       body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${this.base64}`
-      }
+      ...this.options
     })
       .then(res => JSON.parse(res.body))
   }
