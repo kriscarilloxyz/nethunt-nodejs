@@ -203,10 +203,7 @@ class Nethunt {
     return requestPromise.post(
       `https://nethunt.com/api/v1/zapier/actions/update-record/${recordId}`, {
       body: JSON.stringify(body),
-      headers: {
-        Authorization: `Basic ${this.base64}`,
-        "Content-Type": "application/json"
-      }
+      ...this.options
     })
       .then(res => JSON.parse(res.body))
   }
