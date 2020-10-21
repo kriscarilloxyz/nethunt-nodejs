@@ -19,6 +19,7 @@
     "test:createComment": "mocha tests/nethunt.createComment.test",
     "test:createCallLog": "mocha tests/nethunt.createCallLog.test",
     "test:updateRecord": "mocha tests/nethunt.updateRecord.test",
+    "test:linkGmailThread": "mocha tests/nethunt.linkGmailThread.test",
     "coverage": "nyc npm run test",
     "coverage:html": "nyc --reporter=html npm run test",
     "release:minor": "npm version minor && git push && npm publish",

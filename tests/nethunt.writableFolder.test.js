@@ -18,7 +18,7 @@ describe('writableFolder', () => {
   })
 
   context('valid credentials', () => {
-    it('returns list of writable folders', () => {
+    it('returns list of writable folders', (done) => {
       client.writableFolder()
         .then(response => {
           expect(response).to.be.an('array')

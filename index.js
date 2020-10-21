@@ -207,7 +207,23 @@ class Nethunt {
     })
       .then(res => JSON.parse(res.body))
   }
-  linkGmailThread () { }
+
+  /**
+   *
+   *
+   * @param {*} recordId
+   * @param {*} body
+   * @return {*} 
+   * @memberof Nethunt
+   */
+  linkGmailThread (recordId, body) {
+    return requestPromise.post(
+      `https://nethunt.com/api/v1/zapier/actions/link-gmail-thread/${recordId}`, {
+      body: JSON.stringify(body),
+      ...this.options
+    }
+    )
+  }
 
   /**
    *

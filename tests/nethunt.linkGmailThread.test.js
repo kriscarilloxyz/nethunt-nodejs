@@ -2,32 +2,30 @@ require('dotenv').config()
 const { expect } = require('chai')
 const Nethunt = require('../index')
 
-describe('folderField', () => {
+describe('linkGmailThread', () => {
   const { TEST_USERNAME, TEST_PASSWORD, TEST_FOLDERID } = process.env
   const clientInvalid = new Nethunt(true, true)
   const client = new Nethunt(TEST_USERNAME, TEST_PASSWORD)
 
+
   context('invalid credentials', () => {
     it('throws error', (done) => {
-      clientInvalid.folderField()
+      clientInvalid.linkGmailThread()
         .catch(err => {
-          expect(err.body).to.equal('Your email address or API key does not appear to be valid')
+          expect(err.body).to.throw
           done()
         })
     })
   })
 
-  context('folderId is not given', () => {
-    it('throws error', () => {
-      expect(() => client.folderField()).to.throw
-    })
-  })
-
   context('valid credentials', () => {
-    it('returns list of folder fields', (done) => {
-      client.folderField(TEST_FOLDERID)
-        .then(response => {
-          expect(response).to.be.an('array')
+    it('creates a new link gmail thread', (done) => {
+      client.linkGmailThread(TEST_FOLDERID, {
+        gmailThreadId: "1234567890abcdef"
+      })
+        .catch(err => {
+          // Expect throw an error since gmailThreadId doesn't exist 
+          expect(err).to.throw
           done()
         })
     })
